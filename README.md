@@ -1,0 +1,31 @@
+// Project
+// Users: Guest + Admin
+
+// Code
+git init
+npm init
+npm i express, ejs
+
+// Structure (Guest)
+
+1. Index
+2. Products (Popular Destinations)
+3. Products (All Destinations)
+4. Products (Inspiration)
+5. Log In
+6. Register
+   > > User needs to be logged in to access the below
+   > > 5a. View Products
+   > > 5b. Wishlist
+   > > 5c. Booking
+
+// Structure (Admin)
+
+1. Index (Dashboard)
+2. Product Directory
+3. Create/edit/delete products
+
+// Steps
+
+1. Set up MVC
+2. Connect to Mongo Atlas
