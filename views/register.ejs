@@ -4,9 +4,12 @@
 
   <p>Create an account</p>
 
-  <form method="POST" action="/login">
+  <form method="POST" action="/register">
+    <input type="text" name="firstname" placeholder="First Name"/>
+    <input type="text" name="lastname" placeholder="Last Name"/>
     <input type="text" name="email" placeholder="Email address"/>
     <input type="password" name="password" placeholder="Enter password" />
+    <input type="password" name="confirm_password" placeholder="Re-enter password" />
     <input type="submit" value="Sign Up" />
   </form>
 

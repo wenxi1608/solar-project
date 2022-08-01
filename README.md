@@ -29,3 +29,5 @@ npm i express, ejs
 
 1. Set up MVC
 2. Connect to Mongo Atlas
+3. Seed product data
+4. set up login/register page (install bcrypt)
