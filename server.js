@@ -8,6 +8,8 @@ require("dotenv").config();
 const port = process.env.PORT;
 const connectionString = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0.ghywbpy.mongodb.net/?retryWrites=true&w=majority`; //the connection from Mongo Atlas
 
+app.set("view engine", "ejs");
+
 // Middleware
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
@@ -25,12 +27,16 @@ const homeController = require("./controllers/home");
 app.use("/", homeController);
 
 // Product Routes
-const productController = require("./controllers/products/products");
+const productController = require("./controllers/products");
 app.use("/products", productController);
 
 // New User Route
-const userController = require("./controllers/users/users");
+const userController = require("./controllers/users");
 app.use("/register", userController);
+
+// Login/Sessions Route
+const sessionsController = require("./controllers/sessions");
+app.use("/login", sessionsController);
 
 app.listen(port, async () => {
   try {

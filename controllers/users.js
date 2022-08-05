@@ -1,6 +1,6 @@
 const bcrypt = require("bcrypt");
 const express = require("express");
-const User = require("../../models/userdb");
+const User = require("../models/userdb");
 const user = express.Router();
 
 const Joi = require("joi");
@@ -9,32 +9,68 @@ const userSchema = Joi.object({
   firstname: Joi.string()
     .min(3)
     .messages({
-      "firstname.minChar": "First name must be at least 3 characters long",
+      "string.min": "Please provide your first name",
     })
     .required(),
-  lastname: Joi.string().min(1).required(),
-  email: Joi.string().email().required(),
+  lastname: Joi.string()
+    .min(1)
+    .messages({
+      "string.min": "Please provide your last name",
+    })
+    .required(),
+  email: Joi.string()
+    .email()
+    .messages({
+      "string.min": "Please provide your email",
+    })
+    .required(),
   password: Joi.string()
     .min(8)
     .messages({
-      "password.minChar": "Password must have at least 8 characters",
+      "string.min": "Password must have at least 8 characters",
     })
     .required(),
-  confirm_password: Joi.string().min(8).required(),
+  confirm_password: Joi.string()
+    .min(8)
+    .messages({
+      "string.min": "Please re-enter your password",
+    })
+    .required(),
 });
 
 user.get("/", (req, res) => {
-  res.render("/register.ejs");
+  res.render("/register.ejs", {});
 });
 
 user.post("/", async (req, res) => {
   //Check user input
   const validation = userSchema.validate(req.body, { abortEarly: false });
 
+  // if user input doesn't match schema, display error message
+
   if (validation.error) {
-    res.send(validation.error);
+    let errorObject = {
+      firstname: null,
+      lastname: null,
+      email: null,
+      password: null,
+      confirm_password: null,
+    };
+
+    validation.error.details.forEach((detail) => {
+      errorObject[detail.context.key] = detail.message;
+    });
+
+    res.render("/register.ejs", {
+      errorMsg: errorObject,
+    });
     return;
   }
+
+  // if (validation.error) {
+  //   res.send(validation.error);
+  //   return;
+  // }
 
   const validatedResults = validation.value;
 
@@ -62,7 +98,6 @@ user.post("/", async (req, res) => {
     res.send("Error: Unable to create user");
   }
   res.redirect("/");
-  // Pop up a page that says user created, then redirect
 });
 
 module.exports = user;
