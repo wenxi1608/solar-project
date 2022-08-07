@@ -38,6 +38,13 @@ app.use("/register", userController);
 const sessionsController = require("./controllers/sessions");
 app.use("/login", sessionsController);
 
+// Auth Middleware
+const auth = require("./middleware/auth");
+
+// User Authenticated Routes
+const profileController = require("./controllers/profile");
+app.use("/profile", auth.isAuthenticated, profileController);
+
 app.listen(port, async () => {
   try {
     await mongoose.connect(connectionString, { dbName: "solar" });

@@ -23,6 +23,8 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav">
+
+          <% if (!authUser) { %>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               English
@@ -39,9 +41,6 @@
           <li class="nav-item">
             <a class="nav-link" href="#">Cart</a>
           </li>
-
-          <!--Do an if statement here where if user is not auth, display login/reg-->
-
           <li class="nav-item">
             <a class="nav-link" href="/login">Log in</a>
           </li>
@@ -49,7 +48,21 @@
             <a class="nav-link" href="/register">Register</a>
           </li>
 
-          <!--else statement if user is auth, -->
+          <% } else { %>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Wishlist</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Cart</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/profile">Profile</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/logout">Logout</a>
+            </li>
+
+            <% } %> 
 
         </ul>
       </div>

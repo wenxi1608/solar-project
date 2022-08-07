@@ -3,16 +3,8 @@ const home = express.Router();
 const Products = require("../models/productdb");
 
 home.get("/", (req, res) => {
-  res.render("index.ejs");
+  res.render("index.ejs", { authUser: null });
 });
-
-// home.get("/register", (req, res) => {
-//   res.render("register.ejs");
-// });
-
-// home.get("/login", (req, res) => {
-//   res.render("login.ejs");
-// });
 
 module.exports = home;
 

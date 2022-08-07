@@ -40,6 +40,7 @@ const userSchema = Joi.object({
 
 user.get("/", (req, res) => {
   res.render("register.ejs", {
+    authUser: null,
     errorMsg: {},
   });
 });
@@ -65,6 +66,7 @@ user.post("/", async (req, res) => {
 
     res.render("register.ejs", {
       errorMsg: errorObject,
+      authUser: null,
     });
     return;
   }

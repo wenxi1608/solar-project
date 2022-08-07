@@ -4,16 +4,16 @@ const express = require("express");
 const sessions = express.Router();
 
 sessions.get("/", (req, res) => {
-  res.render("login.ejs");
+  res.render("login.ejs", { authUser: null });
 });
 
 sessions.post("/", async (req, res) => {
-  const validatedResults = req.body;
+  const userLogin = req.body;
   let user = null;
 
   // Get user email from DB
   try {
-    user = await User.findOne({ email: validatedResults.loginemail });
+    user = await User.findOne({ email: userLogin.loginemail });
   } catch (err) {
     res.send("Email not found");
     return;
@@ -21,7 +21,7 @@ sessions.post("/", async (req, res) => {
 
   // use bcrypt compare to compare pwds
   const pwMatches = await bcrypt.compare(
-    validatedResults.loginpassword,
+    userLogin.loginpassword,
     user.password
   );
 
@@ -37,9 +37,16 @@ sessions.post("/", async (req, res) => {
       return;
     }
 
-    req.session.user = user.loginemail;
+    req.session.user = userLogin.loginemail;
 
-    res.redirect("/");
+    req.session.save((err) => {
+      if (err) {
+        res.send("unable to save session");
+        return;
+      }
+
+      res.redirect("/profile");
+    });
   });
 });
 
