@@ -45,6 +45,10 @@ const auth = require("./middleware/auth");
 const profileController = require("./controllers/profile");
 app.use("/profile", auth.isAuthenticated, profileController);
 
+// Cart Routes
+const cartController = require("./controllers/cart");
+app.use("/cart", cartController);
+
 app.listen(port, async () => {
   try {
     await mongoose.connect(connectionString, { dbName: "solar" });

@@ -31,3 +31,4 @@ npm i express, ejs
 2. Connect to Mongo Atlas
 3. Seed product data
 4. set up login/register page (install bcrypt)
+5. install v-calendar package (https://vcalendar.io/)

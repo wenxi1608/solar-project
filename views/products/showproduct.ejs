@@ -2,11 +2,11 @@
 
   <h1><%= foundProduct.name %></h1>
 
-  <div class="container">
+  <div class="container-fluid">
 
     <img src="<%= foundProduct.img %>" class="img-fluid">
-    <div class="caption"><%= foundProduct.caption %></div>
-    <div class="category"><%= foundProduct.bodyType %></div>
+    <h3><%= foundProduct.caption %></h3>
+    <h5><%= foundProduct.bodyType %></h5>
     <div class="price">Price Per Person: from $<%= foundProduct.price %></div>
     <div class="highlights">Highlights
       <% foundProduct.highlights.forEach(item => { %></div>
@@ -14,5 +14,21 @@
           <li><%= item %></li>
         </ul>
       <% }) %>
+
+    <form method="POST" action="/destinations/<%= foundProduct.name %>">
+      <div class="mb-3">
+        <label for="form-date" class="form-label">Select a date</label>
+        <p>All packages are fixed dated unless otherwise stated.</p>
+        <input type="date" class="form-control" id="date" name="date">
+      <div class="mb-3">
+        <label for="form-qty" class="form-label">Select no. of participants</label>
+        <input type="number" class="form-control" id="qty" name="qty" min="1" max="5">
+      </div>
+      <div class="col-12">
+        <button class="btn btn-primary" type="submit">Add to cart</button>
+      </div>
+    </form>
+
+    </div>
 
 <%- include('../partials/footer'); -%>

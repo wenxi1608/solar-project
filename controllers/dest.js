@@ -15,7 +15,6 @@ destinations.get("/:dest", async (req, res) => {
   try {
     const productName = req.params.dest;
     const foundProduct = await Product.findOne({ name: productName });
-    console.log(foundProduct);
 
     res.render("products/showproduct.ejs", {
       foundProduct,
@@ -23,6 +22,17 @@ destinations.get("/:dest", async (req, res) => {
     });
   } catch (error) {
     res.send("Destination not found");
+  }
+});
+
+destinations.post("/:dest", async (req, res) => {
+  try {
+    const productName = req.params.dest;
+    const bookingOptions = req.body;
+
+    res.redirect("/cart");
+  } catch (error) {
+    res.send("Failed to create booking");
   }
 });
 
