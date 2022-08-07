@@ -1,0 +1,18 @@
+<%- include('../partials/header'); -%>
+
+  <h1><%= foundProduct.name %></h1>
+
+  <div class="container">
+
+    <img src="<%= foundProduct.img %>" class="img-fluid">
+    <div class="caption"><%= foundProduct.caption %></div>
+    <div class="category"><%= foundProduct.bodyType %></div>
+    <div class="price">Price Per Person: from $<%= foundProduct.price %></div>
+    <div class="highlights">Highlights
+      <% foundProduct.highlights.forEach(item => { %></div>
+        <ul>
+          <li><%= item %></li>
+        </ul>
+      <% }) %>
+
+<%- include('../partials/footer'); -%>

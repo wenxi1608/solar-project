@@ -27,8 +27,8 @@ const homeController = require("./controllers/home");
 app.use("/", homeController);
 
 // Product Routes
-const productController = require("./controllers/products");
-app.use("/products", productController);
+const destController = require("./controllers/dest");
+app.use("/destinations", destController);
 
 // New User Route
 const userController = require("./controllers/users");

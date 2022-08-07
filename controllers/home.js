@@ -8,6 +8,8 @@ home.get("/", (req, res) => {
 
 module.exports = home;
 
+// Seed Data
+
 // const seedData = require("../database/seed/seed");
 // home.get("/seed", async (req, res) => {
 //   await Products.insertMany(seedData);

@@ -3,10 +3,10 @@
   <h1>All Destinations</h1>
 
   <div class="row row-cols-1 row-cols-md-3 g-4">
-    <% destinations.forEach(item => { %>
+    <% listOfdestinations.forEach(item => { %>
     <div class="col">
       <div class="card h-100">
-        <a href="#"><img src= "<%= item.img %>" class="card-img-top" alt="..."></a>
+        <a href="/destinations/<%= item.name %>"><img src= "<%= item.img %>" class="card-img-top" alt="..."></a>
         <div class="card-body">
           <h5 class="card-title"><%= item.name %></h5>
           <p class="card-text"><%= item.caption %></p>

@@ -13,7 +13,7 @@ const productSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  poiCategory: {
+  bodyType: {
     type: String,
     required: true,
   },
@@ -22,11 +22,7 @@ const productSchema = new mongoose.Schema({
     required: true,
   },
   highlights: {
-    type: String,
-    required: true,
-  },
-  fullDescription: {
-    type: String,
+    type: Array,
     required: true,
   },
 });
