@@ -7,7 +7,8 @@
   <form method="POST" action="/register" class="row g-3">
 
     <div class="col-md-4">
-      <input type="text" class="form-control is-invalid" name="firstname" id="firstname" placeholder="First name">
+      <input type="text" class="form-control is-valid is-invalid" name="firstname" id="firstname" placeholder="First name">
+      <div class="valid-feedback"></div>
       <div id="validationServer04Feedback" class="invalid-feedback">
         <% if (errorMsg.firstname) { %>
           <p><%= errorMsg.firstname %></p>
@@ -47,11 +48,33 @@
       </div>
     </div>
 
+    <!--Modal: Account created-->
+     <!-- Button trigger modal -->
     <div class="col-12">
-      <button class="btn btn-primary" type="submit">Create an account</button>
+      <button class="btn btn-primary" type="submit" data-bs-toggle="modal" data-bs-target="#regSuccessModal">Create an account</button>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="regSuccessModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Welcome to Solar</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p>Your account has been created</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Back to Home</button>
+          </div>
+        </div>
+      </div>
     </div>
 
     <div>By creating an account, you agree to our Terms of Service and Privacy Statement.</div>
   </form>
+
 
 <%- include('partials/footer'); -%>

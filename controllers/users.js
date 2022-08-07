@@ -39,7 +39,9 @@ const userSchema = Joi.object({
 });
 
 user.get("/", (req, res) => {
-  res.render("/register.ejs", {});
+  res.render("register.ejs", {
+    errorMsg: {},
+  });
 });
 
 user.post("/", async (req, res) => {
@@ -61,16 +63,11 @@ user.post("/", async (req, res) => {
       errorObject[detail.context.key] = detail.message;
     });
 
-    res.render("/register.ejs", {
+    res.render("register.ejs", {
       errorMsg: errorObject,
     });
     return;
   }
-
-  // if (validation.error) {
-  //   res.send(validation.error);
-  //   return;
-  // }
 
   const validatedResults = validation.value;
 
@@ -97,6 +94,8 @@ user.post("/", async (req, res) => {
     console.log(error);
     res.send("Error: Unable to create user");
   }
+
+  // show pop up message that user is created, when user clicks ok, res.redirect
   res.redirect("/");
 });
 
