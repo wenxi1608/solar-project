@@ -1,6 +1,7 @@
 const express = require("express");
 const destinations = express.Router();
 const Product = require("../models/productdb");
+const fetch = require("node-fetch");
 
 destinations.get("/", async (req, res) => {
   try {
@@ -11,15 +12,38 @@ destinations.get("/", async (req, res) => {
   }
 });
 
+//Start2
+
 destinations.get("/:dest", async (req, res) => {
   try {
-    const productName = req.params.dest;
-    const foundProduct = await Product.findOne({ name: productName });
+    async function getResponse() {
+      const response = await fetch(
+        "https://api.le-systeme-solaire.net/rest/bodies/"
+      );
+      const data = await response.json();
 
-    res.render("products/showproduct.ejs", {
-      foundProduct,
-      authUser: null,
-    });
+      const productName = req.params.dest;
+      const foundProduct = await Product.findOne({ name: productName });
+
+      let discoveredBy = {};
+      let discoveryDate = {};
+      data.bodies.forEach((element) => {
+        if (element.englishName === `${productName}`) {
+          return (
+            (discoveredBy = element.discoveredBy),
+            (discoveryDate = element.discoveryDate)
+          );
+        }
+      });
+
+      res.render("products/showproduct.ejs", {
+        foundProduct,
+        authUser: null,
+        discoveredBy,
+        discoveryDate,
+      });
+    }
+    getResponse();
   } catch (error) {
     res.send("Destination not found");
   }
