@@ -1,6 +1,8 @@
 const express = require("express");
 const destinations = express.Router();
 const Product = require("../models/productdb");
+const Cart = require("../models/cartdb");
+const User = require("../models/userdb");
 const fetch = require("node-fetch");
 
 destinations.get("/", async (req, res) => {
@@ -11,8 +13,6 @@ destinations.get("/", async (req, res) => {
     res.send("Error");
   }
 });
-
-//Start2
 
 destinations.get("/:dest", async (req, res) => {
   try {
@@ -25,8 +25,8 @@ destinations.get("/:dest", async (req, res) => {
       const productName = req.params.dest;
       const foundProduct = await Product.findOne({ name: productName });
 
-      let discoveredBy = {};
-      let discoveryDate = {};
+      // let discoveredBy = {};
+      // let discoveryDate = {};
       data.bodies.forEach((element) => {
         if (element.englishName === `${productName}`) {
           return (
@@ -50,13 +50,27 @@ destinations.get("/:dest", async (req, res) => {
 });
 
 destinations.post("/:dest", async (req, res) => {
-  try {
-    const productName = req.params.dest;
-    const bookingOptions = req.body;
+  const productName = req.params.dest;
+  const foundProduct = await Product.findOne({ name: productName });
+  const foundUser = await User.findOne({ email: req.session.user });
+  const totalPax = req.body.qty;
+  const travelDate = req.body.date;
+  const totalPrice = foundProduct.price * totalPax;
+  console.log("Session User:", foundUser);
 
-    res.redirect("/cart");
+  //Store the new cart item in DB
+  try {
+    await Cart.create({
+      user: foundUser,
+      productName,
+      totalPax,
+      totalPrice,
+      travelDate,
+    });
+    res.send("added item to cart");
   } catch (error) {
-    res.send("Failed to create booking");
+    console.log(error);
+    res.send("Failed to add to cart");
   }
 });
 

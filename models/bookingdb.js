@@ -1,36 +1,29 @@
 const mongoose = require("mongoose");
 
-const productSchema = new mongoose.Schema({
-  name: {
+const bookingSchema = new mongoose.Schema({
+  user: {
+    type: mongoose.Schema.Types.ObjectId, // Declare the user property as a mongoose ObjectId
+    ref: "User",
+    required: true,
+  },
+  productName: {
     type: String,
     required: true,
   },
-  img: {
-    type: Array,
-    required: true,
-  },
-  caption: {
-    type: String,
-    required: true,
-  },
-  poiCategory: {
-    type: String,
-    required: true,
-  },
-  price: {
+  totalPax: {
     type: Number,
     required: true,
   },
-  highlights: {
-    type: String,
+  totalPrice: {
+    type: Number,
     required: true,
   },
-  fullDescription: {
-    type: String,
+  travelDate: {
+    type: Date,
     required: true,
   },
 });
 
-const Product = mongoose.model("Product", productSchema); //give the model name "Product" and mongoose will infer the collection name with an s and lower case
+const Booking = mongoose.model("Booking", bookingSchema);
 
-module.exports = Product;
+module.exports = Booking;

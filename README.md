@@ -32,4 +32,4 @@ npm i express, ejs
 3. Seed product data
 4. set up login/register page (install bcrypt)
 5. install v-calendar package (https://vcalendar.io/)
-6. npm install node-fetch@2
+6. npm install node-fetch@2 to call API from https://api.le-systeme-solaire.net/rest/bodies/
