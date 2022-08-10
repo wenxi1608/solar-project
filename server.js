@@ -4,6 +4,7 @@ const session = require("express-session");
 const mongoose = require("mongoose");
 const app = express();
 require("dotenv").config();
+const auth = require("./middleware/auth");
 
 const port = process.env.PORT;
 const connectionString = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0.ghywbpy.mongodb.net/?retryWrites=true&w=majority`; //the connection from Mongo Atlas
@@ -21,6 +22,7 @@ app.use(
     cookie: { secure: false, httpOnly: false, maxAge: 600000 },
   })
 );
+app.use(auth.setAuthUser);
 
 // Home Routes;
 const homeController = require("./controllers/home");
@@ -38,10 +40,7 @@ app.use("/register", userController);
 const sessionsController = require("./controllers/sessions");
 app.use("/login", sessionsController);
 
-// Auth Middleware
-const auth = require("./middleware/auth");
-
-// User Authenticated Routes
+// Protected Routes
 const profileController = require("./controllers/profile");
 app.use("/profile", auth.isAuthenticated, profileController);
 

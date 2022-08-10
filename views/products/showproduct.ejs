@@ -14,6 +14,8 @@
           <li><%= item %></li>
         </ul>
       <% }) %>
+    <div class="discoveredBy">Discovered By:<%= discoveredBy %></div>
+    <div class="discoveryDate">Discovery Date:<%= discoveryDate %></div>
 
     <form method="POST" action="/destinations/<%= foundProduct.name %>">
       <div class="mb-3">
@@ -29,8 +31,6 @@
       </div>
     </form>
 
-    <p><%= discoveredBy %></p>
-    <p><%= discoveryDate %></p>
     </div>
 
 <%- include('../partials/footer'); -%>

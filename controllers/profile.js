@@ -7,7 +7,7 @@ profile.get("/", async (req, res) => {
   let authUser = null;
 
   try {
-    authUser = await User.findOne({ email: req.session.user });
+    user = await User.findOne({ email: req.session.user });
   } catch (err) {
     console.log(err);
     res.redirect("/login");
@@ -15,8 +15,8 @@ profile.get("/", async (req, res) => {
   }
 
   res.render("profile.ejs", {
-    authUser,
-    firstName: authUser.firstname,
+    user,
+    firstName: user.firstname,
   });
 });
 

@@ -1,6 +1,7 @@
 <%- include('partials/header'); -%>
 
   <h1>Register</h1>
+  <i class="fas fa-user-alt"></i>
 
   <p>Create an account</p>
 
@@ -24,7 +25,7 @@
       </div>
     </div>
     <div class="col-md-4">
-      <input type="text" class="form-control is-invalid" name="email" id="email" placeholder="Email">
+      <input type="email" class="form-control is-invalid" name="email" id="email" placeholder="Email">
       <div id="validationServer04Feedback" class="invalid-feedback">
         <% if (errorMsg.email) { %>
           <p><%= errorMsg.email %></p>
@@ -32,7 +33,7 @@
       </div>
     </div>
     <div class="col-md-4">
-      <input type="text" class="form-control is-invalid" name="password" id="password" placeholder="Password">
+      <input type="password" class="form-control is-invalid" name="password" id="password" placeholder="Password">
       <div id="validationServer04Feedback" class="invalid-feedback">
         <% if (errorMsg.password) { %>
           <p><%= errorMsg.password %></p>
@@ -40,7 +41,7 @@
       </div>
     </div>
     <div class="col-md-4">
-      <input type="text" class="form-control is-invalid" name="confirm_password" id="confirm_password" placeholder="Re-enter password">
+      <input type="password" class="form-control is-invalid" name="confirm_password" id="confirm_password" placeholder="Re-enter password">
       <div id="validationServer04Feedback" class="invalid-feedback">
         <% if (errorMsg.confirm_password) { %>
           <p><%= errorMsg.confirm_password %></p>

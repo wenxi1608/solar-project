@@ -7,4 +7,14 @@ module.exports = {
 
     next();
   },
+
+  setAuthUser: (req, res, next) => {
+    if (req.session.user) {
+      res.locals.authUser = req.session.user; // set authUser as a global variable accessible across ejs files
+    } else {
+      res.locals.authUser = null;
+    }
+
+    next();
+  },
 };

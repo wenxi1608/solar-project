@@ -7,10 +7,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
-  <link href="../../public/main.css" rel="stylesheet">
+  <link href="/main.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/@mdi/font@6.x/css/materialdesignicons.min.css" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
   <title>Solar</title>
 </head>
 
@@ -18,7 +16,7 @@
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
       <a class="navbar-brand" href="/">
-        <img src="../../public/img/FX13_planet.svg" alt="" width="" height="24" class="d-inline-block align-text-top">
+        <img src="/img/planet-icon.svg" alt="" width="" height="24" class="d-inline-block align-text-top">
         Solar
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -39,33 +37,30 @@
             </ul>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Wishlist</a>
+            <a class="nav-link" href="/login"><img src="/img/login-icon.png" alt="" width="" height="20" class="d-inline-block align-text-top">
+              Log in</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/destinations">Destinations</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Cart</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/login">Log in</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/register">Register</a>
+            <a class="nav-link" href="/register"><img src="/img/register-icon.png" alt="" width="" height="20" class="d-inline-block align-text-top">
+              Register</a>
           </li>
 
           <% } else { %>
             <li class="nav-item">
-              <a class="nav-link" href="#">Wishlist</a>
+              <a class="nav-link" href="#"><img src="/img/heart-icon.png" alt="" width="" height="20" class="d-inline-block align-text-top">
+                Wishlist</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/destinations">Destinations</a>
+              <a class="nav-link" href="/cart"><img src="/img/cart-icon.png" alt="" width="" height="18" class="d-inline-block align-text-top">
+                Cart</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Cart</a>
+              <a class="nav-link" href="/destinations"><img src="/img/register-icon.png" alt="" width="" height="20" class="d-inline-block align-text-top">
+                Destinations</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/profile">Profile</a>
+              <a class="nav-link" href="/profile"><img src="/img/register-icon.png" alt="" width="" height="20" class="d-inline-block align-text-top">
+                Profile</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="/logout">Logout</a>

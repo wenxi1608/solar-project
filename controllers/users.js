@@ -1,8 +1,8 @@
 const bcrypt = require("bcrypt");
 const express = require("express");
 const User = require("../models/userdb");
+const Cart = require("../models/cartdb");
 const user = express.Router();
-
 const Joi = require("joi");
 
 const userSchema = Joi.object({
@@ -40,7 +40,6 @@ const userSchema = Joi.object({
 
 user.get("/", (req, res) => {
   res.render("register.ejs", {
-    authUser: null,
     errorMsg: {},
   });
 });
@@ -66,7 +65,6 @@ user.post("/", async (req, res) => {
 
     res.render("register.ejs", {
       errorMsg: errorObject,
-      authUser: null,
     });
     return;
   }
@@ -85,19 +83,29 @@ user.post("/", async (req, res) => {
   );
 
   // Store the new user in DB
+
+  // First create a cart document to declare cart property in user DB as cart document ._id
+
+  const cartDoc = await Cart.create({}); // this will return cartDocument
+  const cartId = cartDoc._id;
+  console.log("cartDoc:", cartId);
+
   try {
     await User.create({
       firstname: validatedResults.firstname,
       lastname: validatedResults.lastname,
       email: validatedResults.email,
       password: hash,
+      cart: cartId,
     });
   } catch (error) {
     console.log(error);
     res.send("Error: Unable to create user");
   }
 
-  // show pop up message that user is created, when user clicks ok, res.redirect
+  // show pop up message that user is created, when user clicks ok
+
+  // Redirect to home page
   res.redirect("/");
 });
 

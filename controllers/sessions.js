@@ -4,7 +4,7 @@ const express = require("express");
 const sessions = express.Router();
 
 sessions.get("/", (req, res) => {
-  res.render("login.ejs", { authUser: null });
+  res.render("login.ejs");
 });
 
 sessions.post("/", async (req, res) => {
@@ -15,6 +15,7 @@ sessions.post("/", async (req, res) => {
   try {
     user = await User.findOne({ email: userLogin.loginemail });
   } catch (err) {
+    console.log(error);
     res.send("Email not found");
     return;
   }
@@ -37,7 +38,9 @@ sessions.post("/", async (req, res) => {
       return;
     }
 
-    req.session.user = userLogin.loginemail;
+    req.session.user = user.email;
+    req.session.userId = user._id;
+    req.session.cartId = user.cart;
 
     req.session.save((err) => {
       if (err) {
@@ -45,7 +48,7 @@ sessions.post("/", async (req, res) => {
         return;
       }
 
-      res.redirect("/profile");
+      res.redirect("/");
     });
   });
 });

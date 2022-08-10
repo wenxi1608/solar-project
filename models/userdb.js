@@ -17,18 +17,11 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  cart: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Cart",
-    },
-  ],
-  booking: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Booking",
-    },
-  ],
+  cart: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Cart",
+    required: true, // i.e. cart property is created when user is created but have to pass it as null value first
+  },
 });
 
 const User = mongoose.model("Users", userSchema);

@@ -6,7 +6,7 @@
     <% listOfDestinations.forEach(item => { %>
     <div class="col">
       <div class="card h-100">
-        <a href="/destinations/<%= item.name %>"><img src= "<%= item.img %>" class="card-img-top" alt="..."></a>
+        <a href="/destinations/<%= item.name %>"><img src= "<%= item.img %>" class="card-img-top" alt="<%= item.name %>"></a>
         <div class="card-body">
           <h5 class="card-title"><%= item.name %></h5>
           <p class="card-text"><%= item.caption %></p>
