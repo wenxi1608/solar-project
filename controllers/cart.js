@@ -2,13 +2,20 @@ const express = require("express");
 const cart = express.Router();
 const User = require("../models/userdb");
 const Cart = require("../models/cartdb");
+const Product = require("../models/productdb");
+const mongoose = require("mongoose");
 
 cart.get("/", async (req, res) => {
   try {
-    User.findOne({ _id: req.session.userId })
+    await User.findOne({ _id: req.session.userId })
       .populate("cart") // property to populate
       .then((user) => {
-        res.render("cart.ejs", { itemsInCart: user.cart.lineItems });
+        // res.json(user);
+        res.render("cart.ejs", {
+          itemsInCart: user.cart.lineItems,
+          userName: user.firstname,
+          cartId: user.cart._id,
+        });
       });
   } catch (error) {
     console.log(error);
@@ -16,55 +23,22 @@ cart.get("/", async (req, res) => {
   }
 });
 
-module.exports = cart;
+cart.delete("/:cartId/lineItems/:lineItemId", async (req, res) => {
+  console.log("params:", req.params);
 
-// when you res.json(user):
-// {
-//   "_id": "62f332a7376a4a18c4a48cf8",
-//   "firstname": "Wen",
-//   "lastname": "He",
-//   "email": "wenxi.cart@gmail.com",
-//   "password": "$2b$10$0dzX.W71jP.S8ORemxUXNudiJmR6P54wsw7aQmJevM2mNlot05UnK",
-//   "cart": {
-//   "_id": "62f332a7376a4a18c4a48cf6",
-//   "lineItems": [
-//   {
-//   "productName": "Saturn",
-//   "totalPax": 4,
-//   "totalPrice": 4000,
-//   "travelDate": "2022-08-17T00:00:00.000Z",
-//   "_id": "62f332fd376a4a18c4a48cff"
-//   },
-//   {
-//   "productName": "Saturn",
-//   "totalPax": 2,
-//   "totalPrice": 2000,
-//   "travelDate": "2022-08-11T00:00:00.000Z",
-//   "_id": "62f347d1376a4a18c4a48d08"
-//   },
-//   {
-//   "productName": "Saturn",
-//   "totalPax": 2,
-//   "totalPrice": 2000,
-//   "travelDate": "2022-08-25T00:00:00.000Z",
-//   "_id": "62f34894d478f787fcc25c85"
-//   },
-//   {
-//   "productName": "Saturn",
-//   "totalPax": 5,
-//   "totalPrice": 5000,
-//   "travelDate": "2022-08-11T00:00:00.000Z",
-//   "_id": "62f34cd7cd902493ff0e71d5"
-//   },
-//   {
-//   "productName": "Venus",
-//   "totalPax": 5,
-//   "totalPrice": 5000,
-//   "travelDate": "2022-08-12T00:00:00.000Z",
-//   "_id": "62f34fa3097412290119792e"
-//   }
-//   ],
-//   "__v": 0
-//   },
-//   "__v": 0
-//   }
+  try {
+    // suffice to use req.params.cartId because we are find a document in collection
+    await Cart.findByIdAndUpdate(req.params.cartId, {
+      $pull: {
+        lineItems: {
+          _id: mongoose.Types.ObjectId(req.params.lineItemId), // have to use mongoose.Types.ObjectId because we are searching for object Id within an element in the document, not a string
+        },
+      },
+    });
+    res.redirect("/cart");
+  } catch (error) {
+    res.status(400).send("Failed to delete from cart");
+  }
+});
+
+module.exports = cart;

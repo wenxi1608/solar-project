@@ -41,6 +41,7 @@ sessions.post("/", async (req, res) => {
     req.session.user = user.email;
     req.session.userId = user._id;
     req.session.cartId = user.cart;
+    req.session.fname = user.firstname;
 
     req.session.save((err) => {
       if (err) {

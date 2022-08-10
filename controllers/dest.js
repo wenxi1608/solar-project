@@ -71,6 +71,7 @@ destinations.post("/:dest", async (req, res) => {
             totalPax: req.body.qty,
             totalPrice: foundProduct.price * req.body.qty,
             travelDate: req.body.date,
+            productImg: foundProduct.img,
           },
         },
       }

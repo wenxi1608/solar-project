@@ -1,33 +1,32 @@
 <%- include('partials/header'); -%>
 
-  <h1>Cart</h1>
+  <h1><%= userName %>'s Cart</h1>
 
   <div class="container text-left">
+    
+    <% itemsInCart.forEach(item => { %>
     <div class="row">
       <div class="col-2">
-        <img src="../clipart4703492.png">
+        <img src="<%= item.productImg%>">
       </div>
       <div class="col-8">
-        <p>Saturn</p>
-        <p>Travel Date: 2022-10-02</p>
-        <p>No. of Travellers: 2</p>
+        <h5><%= item.productName %></h5>
+        <p>Travel Date: <%= item.travelDate %></p>
+        <p>No. of Travellers:<%= item.totalPax %></p>
       </div>
-      <div class="col-2">Total Price: 1000</div>
+      <div class="col-2">Total Price: <%= item.totalPrice%></div>
+      <form method="POST" action="/cart/<%= cartId %>/lineItems/<%= item._id%>?_method=DELETE">
+        <button type="submit">Delete from Cart</button>
+      </form>  
     </div>
 
-    <div class="row">
-      <div class="col-2">
-        <img src="../clipart4703492.png">
-      </div>
-      <div class="col-8">
-        <p><%= itemsInCart[0].productName %></p>
-        <p>Travel Date: <%= itemsInCart[0].travelDate %></p>
-        <p>No. of Travellers:<%= itemsInCart[0].totalPax %></p>
-      </div>
-      <div class="col-2">Total Price: <%= itemsInCart[0].totalPrice%></div>
-    </div>
+    <!--
+    <form method="POST" action="/cart?_method=DELETE">
+      <button type="submit">Delete from Cart</button>
+    </form>  
+    -->
+
+    <% }) %>
   </div>
-
   
-
 <%- include('partials/footer'); -%>

@@ -15,6 +15,9 @@ const cartSchema = new mongoose.Schema({
       travelDate: {
         type: Date,
       },
+      productImg: {
+        type: String,
+      },
     },
   ],
 });
