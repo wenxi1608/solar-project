@@ -3,6 +3,12 @@
   <h1><%= userName %>'s Cart</h1>
 
   <div class="container text-left">
+  
+    <% if(itemsInCart.length === 0) { %>
+    
+      <p>Your cart is empty</p>
+
+      <% } else { %>
     
     <% itemsInCart.forEach(item => { %>
     <div class="row">
@@ -19,14 +25,10 @@
         <button type="submit">Delete from Cart</button>
       </form>  
     </div>
-
-    <!--
-    <form method="POST" action="/cart?_method=DELETE">
-      <button type="submit">Delete from Cart</button>
-    </form>  
-    -->
-
     <% }) %>
+
+    <% } %>
+
   </div>
   
 <%- include('partials/footer'); -%>

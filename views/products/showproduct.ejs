@@ -19,11 +19,11 @@
 
     <form method="POST" action="/destinations/<%= foundProduct.name %>">
       <div class="mb-3">
-        <label for="form-date" class="form-label">Select a date</label>
+        <label for="form-date" class="form-label"><i class="fa-solid fa-calendar-days"></i>Select a date</label>
         <p>All packages are fixed dated unless otherwise stated.</p>
         <input type="date" class="form-control" id="date" name="date">
       <div class="mb-3">
-        <label for="form-qty" class="form-label">Select no. of participants</label>
+        <label for="form-qty" class="form-label"><i class="fa-solid fa-people-group"></i>Select no. of participants</label>
         <input type="number" class="form-control" id="qty" name="qty" min="1" max="5">
       </div>
       <div class="col-12">
