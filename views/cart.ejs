@@ -1,29 +1,30 @@
 <%- include('partials/header'); -%>
 
-  <h1><%= userName %>'s Cart</h1>
+  <div class="container-fluid">
+    <div class="row" id="show-cart">
 
-  <div class="container text-left">
+      <h1><%= userName %>'s cart</h1>
   
     <% if(itemsInCart.length === 0) { %>
-    
       <p>Your cart is empty</p>
-
       <% } else { %>
     
     <% itemsInCart.forEach(item => { %>
-    <div class="row">
-      <div class="col-2">
+    <div class="row" id="show-cart-item">
+      <div class="col-md-2">
         <img src="<%= item.productImg%>">
       </div>
-      <div class="col-8">
+      <div class="col-md-8">
         <h5><%= item.productName %></h5>
         <p>Travel Date: <%= item.travelDate %></p>
-        <p>No. of Travellers:<%= item.totalPax %></p>
+        <p>No. of Travellers: <%= item.totalPax %></p>
       </div>
-      <div class="col-2">Total Price: <%= item.totalPrice%></div>
-      <form method="POST" action="/cart/<%= cartId %>/lineItems/<%= item._id%>?_method=DELETE">
-        <button type="submit">Delete from Cart</button>
-      </form>  
+      <div class="col-md-2">
+        <p>Total Price: $<%= item.totalPrice %></p>
+        <form method="POST" action="/cart/<%= cartId %>/lineItems/<%= item._id%>?_method=DELETE">
+          <button type="submit">Delete from Cart</button>
+        </form>  
+      </div>
     </div>
     <% }) %>
 

@@ -1,27 +1,58 @@
 <%- include('partials/header'); -%>
 
-  <div class="container text-center">    
-    <h1>Escape into outer space today</h1><br>
-    <div class="row">
-      <div class="col-sm-4">
-        <img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
-        <p>Current Project</p>
-      </div>
-      <div class="col-sm-4"> 
-        <img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
-        <p>Project 2</p>    
-      </div>
-      <div class="col-sm-4">
-        <div class="well">
-         <p>Some text..</p>
-        </div>
-        <div class="well">
-         <p>Some text..</p>
-        </div>
-      </div>
+    <div id="homepage">
+      <div class="container">    
+        <h1>Discover unforgettable<br>travel experiences in space</h1>
+      </div><br>
     </div>
-  </div><br>
-    
-  </div>
+
+    <section class="popular-destinations">
+
+      <h3>Check out these popular destinations</h3>
+
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-4">
+            <div class="card text-bg-dark">
+              <a href="/destinations/Mercury">
+                <img src="https://c4.wallpaperflare.com/wallpaper/417/307/709/space-planet-mercury-black-background-wallpaper-preview.jpg" class="card-img" alt="mercury">
+                <div class="card-img-overlay">
+                  <h5 class="card-title">Mercury</h5>
+                  <p>Where stars are born</p>
+                </div>
+              </a>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="card text-bg-black">
+              <a href="/destinations/Neptune">
+                <img src="https://nypost.com/wp-content/uploads/sites/2/2022/07/Neptune-40.jpg?w=1024" class="card-img" alt="neptune">
+                <div class="card-img-overlay">
+                  <h5 class="card-title">Neptune</h5>
+                  <p>Where stars are born</p>
+                </div>
+              </a>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="card text-bg-dark">
+              <a href="/destinations/Venus">
+                <img src="https://media.wired.com/photos/5dae3d8e182de80009f7fdb6/16:9/w_2400,h_1350,c_limit/science_nasa_Venus!.jpg" class="card-img" alt="venus">
+                <div class="card-img-overlay">
+                  <h5 class="card-title">Venus</h5>
+                  <p>Where stars are born</p>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="homepage-button">
+            <button type="button" class="default-button"><a href="/destinations">See all destinations</a></button>
+          </div>
+        </div>
+      </div>
+
+    </section>
 
   <%- include('partials/footer'); -%>

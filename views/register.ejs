@@ -1,58 +1,82 @@
 <%- include('partials/header'); -%>
 
-  <h1>Register</h1>
+  <div id="registerpage">
 
-  <p>Create an account</p>
+    <div id="register-form-wrapper">
+      <form method="POST" action="/register" id="register-form">
+        <h1>Create an account</h1>
+        <!-- 2 column grid layout with text inputs for the first and last names -->
+        <div class="row mb-4">
+          <div class="col">
+            <div class="form-outline">
+              <input type="text" class="form-control is-invalid" name="firstname" id="firstname" placeholder="First name">
+                <div class="valid-feedback"></div>
+                <div id="validationServer04Feedback" class="invalid-feedback">
+                <% if (errorMsg.firstname) { %>
+                  <p><%= errorMsg.firstname %></p>
+                  <% } %>
+                </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-outline">
+              <div class="col">
+                <div class="form-outline">
+                  <input type="text" class="form-control is-invalid" name="lastname" id="lastname" placeholder="Last name">
+                    <div class="valid-feedback"></div>
+                    <div id="validationServer04Feedback" class="invalid-feedback">
+                    <% if (errorMsg.lastname) { %>
+                      <p><%= errorMsg.lastname %></p>
+                      <% } %>
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      
+        <!-- Email input -->
+        <div class="form-outline mb-4">
+          <input type="email" class="form-control is-invalid" name="email" id="email" placeholder="Email">
+          <div id="validationServer04Feedback" class="invalid-feedback">
+            <% if (errorMsg.email) { %>
+              <p><%= errorMsg.email %></p>
+          <% } %>
+          </div>
+        </div>
+      
+        <!-- Password input -->
+        <div class="form-outline mb-4">
+          <input type="password" class="form-control is-invalid" name="password" id="password" placeholder="Password">
+          <div id="validationServer04Feedback" class="invalid-feedback">
+            <% if (errorMsg.password) { %>
+              <p><%= errorMsg.password %></p>
+          <% } %>
+          </div>
+        </div>
+        
+        <!-- Confirm password input-->
+        <div class="form-outline mb-4">
+          <input type="password" class="form-control is-invalid" name="confirm_password" id="confirm_password" placeholder="Re-enter password">
+          <div id="validationServer04Feedback" class="invalid-feedback">
+            <% if (errorMsg.confirm_password) { %>
+              <p><%= errorMsg.confirm_password %></p>
+          <% } %>
+          </div>
+        </div>
+      
+        <!-- Submit button -->
+        <p>By creating an account, you agree to our Terms of Service and Privacy Statement.</p>
+        <button type="submit" class="btn btn-primary btn-block mb-4" data-bs-toggle="modal" data-bs-target="#regSuccessModal">Sign up</button>
+      
+        <p>Already have an account? <a href="/login">Log in</a></p>
+      </form>
+    </div>
 
-  <form method="POST" action="/register" class="row g-3">
+  </div>
 
-    <div class="col-md-4">
-      <input type="text" class="form-control is-invalid" name="firstname" id="firstname" placeholder="First name">
-      <div class="valid-feedback"></div>
-      <div id="validationServer04Feedback" class="invalid-feedback">
-        <% if (errorMsg.firstname) { %>
-          <p><%= errorMsg.firstname %></p>
-      <% } %>
-      </div>
-    </div>
-    <div class="col-md-4">
-      <input type="text" class="form-control is-invalid" name="lastname" id="lastname" placeholder="Last name">
-      <div id="validationServer04Feedback" class="invalid-feedback">
-        <% if (errorMsg.lastname) { %>
-          <p><%= errorMsg.lastname %></p>
-      <% } %>
-      </div>
-    </div>
-    <div class="col-md-4">
-      <input type="email" class="form-control is-invalid" name="email" id="email" placeholder="Email">
-      <div id="validationServer04Feedback" class="invalid-feedback">
-        <% if (errorMsg.email) { %>
-          <p><%= errorMsg.email %></p>
-      <% } %>
-      </div>
-    </div>
-    <div class="col-md-4">
-      <input type="password" class="form-control is-invalid" name="password" id="password" placeholder="Password">
-      <div id="validationServer04Feedback" class="invalid-feedback">
-        <% if (errorMsg.password) { %>
-          <p><%= errorMsg.password %></p>
-      <% } %>
-      </div>
-    </div>
-    <div class="col-md-4">
-      <input type="password" class="form-control is-invalid" name="confirm_password" id="confirm_password" placeholder="Re-enter password">
-      <div id="validationServer04Feedback" class="invalid-feedback">
-        <% if (errorMsg.confirm_password) { %>
-          <p><%= errorMsg.confirm_password %></p>
-      <% } %>
-      </div>
-    </div>
 
-    <!--Modal: Account created-->
-     <!-- Button trigger modal -->
-    <div class="col-12">
-      <button class="btn btn-primary" type="submit" data-bs-toggle="modal" data-bs-target="#regSuccessModal">Create an account</button>
-    </div>
+    <!--Modal-->
 
     <!-- Modal -->
     <div class="modal fade" id="regSuccessModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -73,7 +97,5 @@
       </div>
     </div>
 
-    <div>By creating an account, you agree to our Terms of Service and Privacy Statement.</div>
-  </form>
 
 <%- include('partials/footer'); -%>

@@ -33,3 +33,205 @@ i {
 .d-inline-block {
   margin-right: 0.2em;
 }
+
+#homepage {
+  height: 80%;
+  background: url(./img/homepage-background.jpeg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding-top: 80px;
+  padding-bottom: 70px;
+}
+
+#homepage h1 {
+  font-size: 3em;
+  font-weight: bold;
+  margin: 0em 1em;
+}
+
+.card {
+  margin-bottom: 2em;
+  border: none;
+  height: 70%;
+  color: white;
+}
+
+.popular-destinations {
+  margin: 20px;
+  height: 100%;
+}
+
+.popular-destinations h5 {
+  color: white;
+}
+
+.popular-destinations p {
+  color: white;
+}
+
+.popular-destinations h3 {
+  margin-left: 2em;
+  margin-top: 2em;
+  margin-bottom: 2em;
+  font-weight: 200;
+  text-align: center;
+}
+
+.homepage-button {
+  text-align: center;
+  margin: 1em;
+}
+
+.default-button {
+  background-color: rgb(255,153,88);
+  border: none;
+  width: 25%;
+  height: 100%;
+  border-radius: 20px;
+  font-size: large;
+  font-weight: 200;
+  color: white;
+}
+
+.homepage-button a {
+  text-decoration-line: none;
+  color: white;
+}
+
+footer {
+  border-top: 1px solid rgb(255,153,88);
+  padding: 1em;
+}
+
+footer li {
+  list-style: none;
+  font-size: medium;
+}
+
+footer h1 {
+  color: rgb(255,153,88);
+  font-weight: bold;
+}
+
+footer h6 {
+  font-weight: bold;
+}
+
+footer p {
+  font-size: small;
+  margin-bottom: 0;
+}
+
+#registerpage {
+  background: url(./img/registerpage-background.jpeg);
+  background-size: contain;
+  background-repeat: no-repeat;
+  height: 1000px;
+  padding: 2em;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+#register-form {
+  color: white;
+  font-weight: 500;
+  background-color: rgba(204, 204, 204, 0.4);
+  text-align: center;
+  width: 600px;
+  padding: 2em;
+  border-radius: 20px;
+}
+
+#register-form h1 {
+  margin: 1em;
+}
+
+#dest-index {
+  color: white;
+  margin: 3em;
+}
+
+#dest-index h1 {
+  margin-bottom: 2em;
+  text-align: center;
+}
+
+#destinations-index-page {
+  border: none;
+  background-size: cover;
+  max-height: 100%;
+  text-align: center;
+  background-color: black;
+}
+
+.card-title {
+  text-align: left;
+  font-weight: bold;
+}
+
+.card-text {
+  border-top: 1px solid white;
+  text-align: left;
+  margin-top: 0.5em;
+  padding: 0.5em;
+}
+
+.card-img-top {
+  width: 250px;
+  height: 250px;
+}
+
+#facts {
+  color: rgb(255,153,88);
+  padding: 1em;
+}
+
+#showdest {
+  margin: 2em;
+}
+
+#showdest-info {
+  background-color: lightgray;
+  border: 1px solid rgb(255,153,88);
+  border-radius: 20px;
+  padding: 2em;
+  color:black
+}
+
+#add-date {
+  margin-bottom: 1em;
+  max-width: 50%;
+}
+
+#add-pax {
+  margin-bottom: 1em;
+  max-width: 50%;
+}
+
+#show-cart {
+  margin: 1em;
+  width: 100%;
+}
+
+#show-cart-item {
+  margin: 3em;
+  border: 1px solid rgb(255,153,88);
+  border-radius: 20px;
+  padding: 2em;
+}
+
+#show-cart-item img {
+  max-width: 80%;
+}
+
+#show-cart-item button {
+  background-color: rgb(255,153,88);
+  border: none;
+  border-radius: 20px;
+  color: white;
+  max-width: 10em;
+}
+
+
+
+

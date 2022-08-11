@@ -1,36 +1,40 @@
 <%- include('../partials/header'); -%>
 
-  <h1><%= foundProduct.name %></h1>
-
   <div class="container-fluid">
-
-    <img src="<%= foundProduct.img %>" class="img-fluid">
-    <h3><%= foundProduct.caption %></h3>
-    <h5><%= foundProduct.bodyType %></h5>
-    <div class="price">Price Per Person: from $<%= foundProduct.price %></div>
-    <div class="highlights">Highlights
-      <% foundProduct.highlights.forEach(item => { %></div>
-        <ul>
-          <li><%= item %></li>
-        </ul>
-      <% }) %>
-    <div class="discoveredBy">Discovered By:<%= discoveredBy %></div>
-    <div class="discoveryDate">Discovery Date:<%= discoveryDate %></div>
-
-    <form method="POST" action="/destinations/<%= foundProduct.name %>">
-      <div class="mb-3">
-        <label for="form-date" class="form-label"><i class="fa-solid fa-calendar-days"></i>Select a date</label>
-        <p>All packages are fixed dated unless otherwise stated.</p>
-        <input type="date" class="form-control" id="date" name="date">
-      <div class="mb-3">
-        <label for="form-qty" class="form-label"><i class="fa-solid fa-people-group"></i>Select no. of participants</label>
-        <input type="number" class="form-control" id="qty" name="qty" min="1" max="5">
+    <div class="row" id="showdest">
+      <div class="col-md-3">
+        <img src="<%= foundProduct.img %>" class="img-fluid">
+        <div id="facts">
+          <p>Type: <%= foundProduct.bodyType %> </p>
+          <p class="discoveredBy">Discovered by: <%= discoveredBy %></p>
+          <p class="discoveryDate">Discovery date: <%= discoveryDate %></p>
+        </div>
       </div>
-      <div class="col-12">
-        <button class="btn btn-primary" type="submit">Add to cart</button>
-      </div>
-    </form>
-
+        <div class="col-md-9" id="showdest-info">
+          <h1><%= foundProduct.name %></h1>
+          <p><b>About this destination</b>
+            <% foundProduct.highlights.forEach(item => { %></p>
+              <ul>
+                <li><%= item %></li>
+              </ul>
+            <% }) %>
+          <p><b>Price Per Person: $<%= foundProduct.price %></b></p>
+          <p><b>All packages are fixed dated unless otherwise stated.</b></p>
+          <form method="POST" action="/destinations/<%= foundProduct.name %>">
+            <div class="mb-3" id="add-date">
+              <label for="form-date" class="form-label"><i class="fa-solid fa-calendar-days"></i>Select a date</label>
+              <input type="date" class="form-control" id="date" name="date">
+            </div>
+            <div class="mb-3" id="add-pax">
+              <label for="form-qty" class="form-label"><i class="fa-solid fa-people-group"></i>Select no. of participants</label>
+                <input type="number" class="form-control" id="qty" name="qty" min="1" max="5">
+            </div>
+                <button class="btn btn-primary" type="submit">Add to cart</button>
+            </form>
+        </div>
+      
     </div>
+  </div>
+
 
 <%- include('../partials/footer'); -%>

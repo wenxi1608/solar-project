@@ -1,21 +1,26 @@
 <%- include('partials/header'); -%>
 
-  <h1>Log in to Solar</h1>
+<div id="registerpage">
 
-  <form method="POST" action="/login">
-    <div class="row mb-3">
-      <div class="col-sm-6">
-        <input type="email" class="form-control" id="login-email" name="loginemail" placeholder="Email" required>
+  <div id="register-form-wrapper">
+    <form method="POST" action="/login" id="register-form">
+      <h1>Log in</h1>
+      <div class="form-outline mb-4">
+        <div class="col-mb-6">
+          <input type="email" class="form-control" id="login-email" name="loginemail" placeholder="Email" required>
+        </div>
       </div>
-    </div>
-    <div class="row mb-3">
-      <div class="col-sm-6">
-        <input type="password" class="form-control" id="login-password" name="loginpassword" placeholder="Password" required>
+      <div class="form-outline mb-4">
+        <div class="col-mb-6">
+          <input type="password" class="form-control" id="login-password" name="loginpassword" placeholder="Password" required>
+        </div>
       </div>
-    </div>
-    <div class="col-12">
-      <button class="btn btn-primary" type="submit">Log in</button>
-    </div>
-  </form>
+      <div class="col-12">
+        <button class="btn btn-primary" type="submit">Let's go</button>
+      </div>
+    </form>
+  </div>
+
+</div>
 
 <%- include('partials/footer'); -%>
