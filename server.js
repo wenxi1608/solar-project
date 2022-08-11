@@ -7,7 +7,7 @@ require("dotenv").config();
 const auth = require("./middleware/auth");
 const methodOverride = require("method-override");
 
-const port = process.env.PORT;
+const port = process.env.PORT || 3000; // heroku takes whatever port no. available in the environment and assigns it as port no.
 const connectionString = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0.ghywbpy.mongodb.net/?retryWrites=true&w=majority`; //the connection from Mongo Atlas
 
 app.set("view engine", "ejs");
