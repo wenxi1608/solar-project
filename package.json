@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@sendgrid/mail": "^7.7.0",
     "bcrypt": "^5.0.1",
     "dotenv": "^16.0.1",
     "ejs": "^3.1.8",
@@ -8,8 +9,7 @@
     "joi": "^17.6.0",
     "method-override": "^3.0.0",
     "mongoose": "^6.5.0",
-    "node-fetch": "^2.6.7",
-    "v-calendar": "^2.4.1"
+    "node-fetch": "^2.6.7"
   },
   "engines": {
     "node": "16.x",

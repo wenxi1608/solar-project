@@ -1,9 +1,12 @@
-const bcrypt = require("bcrypt");
 const express = require("express");
+const register = express.Router();
+const Joi = require("joi");
+const bcrypt = require("bcrypt");
 const User = require("../models/userdb");
 const Cart = require("../models/cartdb");
-const user = express.Router();
-const Joi = require("joi");
+
+const sgMail = require("@sendgrid/mail");
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 const userSchema = Joi.object({
   firstname: Joi.string()
@@ -38,17 +41,14 @@ const userSchema = Joi.object({
     .required(),
 });
 
-user.get("/", (req, res) => {
+register.get("/", (req, res) => {
   res.render("register.ejs", {
     errorMsg: {},
   });
 });
 
-user.post("/", async (req, res) => {
-  //Check user input
+register.post("/", async (req, res) => {
   const validation = userSchema.validate(req.body, { abortEarly: false });
-
-  // if user input doesn't match schema, display error message
 
   if (validation.error) {
     let errorObject = {
@@ -72,7 +72,7 @@ user.post("/", async (req, res) => {
   const validatedResults = validation.value;
 
   if (validatedResults.password !== validatedResults.confirm_password) {
-    res.send("passwords do not match");
+    res.send("Passwords do not match");
     return;
   }
 
@@ -82,13 +82,12 @@ user.post("/", async (req, res) => {
     bcrypt.genSaltSync(10)
   );
 
-  // Store the new user in DB
+  // Store the new user in DB and add a cart property
 
   // First create a cart document to declare cart property in user DB as cart document ._id
 
   const cartDoc = await Cart.create({}); // this will return cartDocument
   const cartId = cartDoc._id;
-  console.log("cartDoc:", cartId);
 
   try {
     await User.create({
@@ -99,14 +98,28 @@ user.post("/", async (req, res) => {
       cart: cartId,
     });
   } catch (error) {
-    console.log(error);
     res.send("Error: Unable to create user");
   }
 
-  // show pop up message that user is created, when user clicks ok
+  //Send a welcome email to user
+  const msg = {
+    to: validatedResults.email,
+    from: "wenxi.cart@gmail.com",
+    subject: "Hello from Solar",
+    text: "Some random text",
+    html: "<strong>Visit us today</strong>",
+  };
+  sgMail
+    .send(msg)
+    .then((response) => {
+      console.log(response[0].statusCode);
+      console.log(response[0].headers);
+    })
+    .catch((error) => {
+      console.error(error);
+    });
 
-  // Redirect to home page
   res.redirect("/");
 });
 
-module.exports = user;
+module.exports = register;

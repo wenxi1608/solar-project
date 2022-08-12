@@ -1,40 +1,28 @@
-// Project
-// Users: Guest + Admin
+# Solar Project
 
-// Code
-git init
-npm init
-npm i express, ejs
+A travel booking site that allows users to browse and book trips to space.
 
-// Structure (Guest)
+## Features
 
-1. Index
-2. Products (Popular Destinations)
-3. Products (All Destinations)
-4. Products (Inspiration)
-5. Log In
-6. Register
-   > > User needs to be logged in to access the below
-   > > 5a. View Products
-   > > 5b. Wishlist
-   > > 5c. Booking
+1. Registration (with welcome email)
+2. Log in and log out
+3. Browse available destinations
+4. Add to cart
+5. Delete from cart
+6. Edit profile
 
-// Structure (Admin)
+## Resources
 
-1. Index (Dashboard)
-2. Product Directory
-3. Create/edit/delete products
+1. MongoDB Atlas
+2. Bootstrap
+3. SendGrid
 
-// Steps
+## User Flow
 
-1. Set up MVC
-2. Connect to Mongo Atlas
-3. Seed product data
-4. set up login/register page (install bcrypt)
-5. install v-calendar package (https://vcalendar.io/)
-6. npm install node-fetch@2 to call API from https://api.le-systeme-solaire.net/rest/bodies/
-7. npm install method-override
+<img src="/user-flow.png">
 
-// Left to do
+## Things left to do
 
-1. fix listItems date to remove time
+- Fix form validation
+- Use modals
+- Include admin route

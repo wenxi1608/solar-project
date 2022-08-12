@@ -1,7 +1,10 @@
-const User = require("../models/userdb");
-const bcrypt = require("bcrypt");
 const express = require("express");
+const bcrypt = require("bcrypt");
 const sessions = express.Router();
+const User = require("../models/userdb");
+
+const sgMail = require("@sendgrid/mail");
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 sessions.get("/", (req, res) => {
   res.render("login.ejs");
@@ -15,18 +18,15 @@ sessions.post("/", async (req, res) => {
   try {
     user = await User.findOne({ email: userLogin.loginemail });
   } catch (err) {
-    console.log(error);
+    console.log(err);
     res.send("Email not found");
     return;
   }
 
   // use bcrypt compare to compare pwds
-  const pwMatches = await bcrypt.compare(
-    userLogin.loginpassword,
-    user.password
-  );
+  const pwMatch = await bcrypt.compare(userLogin.loginpassword, user.password);
 
-  if (!pwMatches) {
+  if (!pwMatch) {
     res.send("Password is incorrect");
     return;
   }
@@ -45,15 +45,12 @@ sessions.post("/", async (req, res) => {
 
     req.session.save((err) => {
       if (err) {
-        res.send("unable to save session");
+        res.send("Unable to save session");
         return;
       }
-
       res.redirect("/");
     });
   });
 });
-
-// Set isAuthenticated middleware to check if the user id exists
 
 module.exports = sessions;

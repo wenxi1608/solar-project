@@ -9,9 +9,9 @@ destinations.get("/", async (req, res) => {
   try {
     const listOfDestinations = await Product.find();
     res.render("products/index.ejs", { listOfDestinations });
-  } catch (error) {
-    res.send("Error");
-    console.log(error);
+  } catch (err) {
+    res.send("Destinations not found");
+    console.log(err);
   }
 });
 
@@ -21,8 +21,8 @@ destinations.get("/:dest", async (req, res) => {
       const response = await fetch(
         "https://api.le-systeme-solaire.net/rest/bodies/"
       );
-      const data = await response.json();
 
+      const data = await response.json();
       const productName = req.params.dest;
       const foundProduct = await Product.findOne({ name: productName });
 
@@ -34,7 +34,6 @@ destinations.get("/:dest", async (req, res) => {
           );
         }
       });
-
       res.render("products/showproduct.ejs", {
         foundProduct,
         discoveredBy,
@@ -43,7 +42,7 @@ destinations.get("/:dest", async (req, res) => {
     }
     getResponse();
   } catch (error) {
-    res.send("Destination not found");
+    res.status(400).send("Destination not found");
   }
 });
 
@@ -51,36 +50,34 @@ destinations.post("/:dest", async (req, res) => {
   const productName = req.params.dest;
   const foundProduct = await Product.findOne({ name: productName });
   const foundUser = await User.findOne({ email: req.session.user });
-  console.log("Found User:", foundUser);
-  console.log("Found Product:", foundProduct);
-  console.log("Options:", req.body);
-  console.log("User Cart ID in dest.js:", foundUser.cart);
 
-  //Store the selected item options in cart DB
-  try {
-    await Cart.findByIdAndUpdate(
-      // first arg is cartId of session user (i.e. identify document to update)
-      foundUser.cart,
-      //req.session.cartId,
+  if (foundUser === null) {
+    res.redirect("/login");
+  } else {
+    try {
+      await Cart.findByIdAndUpdate(
+        // first arg is cartId of session user (i.e. identify document to update)
+        foundUser.cart,
+        //req.session.cartId,
 
-      // second arg is to push the item options into lineItems which is an array of objects
-      {
-        $push: {
-          lineItems: {
-            productName: req.params.dest,
-            totalPax: req.body.qty,
-            totalPrice: foundProduct.price * req.body.qty,
-            travelDate: req.body.date,
-            productImg: foundProduct.img,
+        // second arg is to push the item options into lineItems which is an array of objects
+        {
+          $push: {
+            lineItems: {
+              productName: req.params.dest,
+              totalPax: req.body.qty,
+              totalPrice: foundProduct.price * req.body.qty,
+              travelDate: req.body.date,
+              productImg: foundProduct.img,
+            },
           },
-        },
-      }
-    );
-
-    res.redirect("/cart");
-  } catch (error) {
-    console.log(error);
-    res.send("Failed to add to cart");
+        }
+      );
+      res.redirect("/cart");
+    } catch (error) {
+      console.log(error);
+      res.status(400).send("Failed to add to cart");
+    }
   }
 });
 

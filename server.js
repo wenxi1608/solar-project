@@ -1,12 +1,13 @@
 // Initialisation
 const express = require("express");
 const session = require("express-session");
+const methodOverride = require("method-override");
 const mongoose = require("mongoose");
 const app = express();
-require("dotenv").config();
 const auth = require("./middleware/auth");
-const methodOverride = require("method-override");
+const sgMail = require("@sendgrid/mail");
 
+require("dotenv").config();
 const port = process.env.PORT || 3000; // heroku takes whatever port no. available in the environment and assigns it as port no.
 const connectionString = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0.ghywbpy.mongodb.net/?retryWrites=true&w=majority`; //the connection from Mongo Atlas
 
@@ -27,7 +28,7 @@ app.use(
 app.use(auth.setAuthUser);
 app.use(methodOverride("_method"));
 
-// Home Routes;
+// Home Routes
 const homeController = require("./controllers/home");
 app.use("/", homeController);
 
@@ -35,15 +36,15 @@ app.use("/", homeController);
 const destController = require("./controllers/dest");
 app.use("/destinations", destController);
 
-// New User Route
-const userController = require("./controllers/users");
-app.use("/register", userController);
+// Register Route
+const registerController = require("./controllers/register");
+app.use("/register", registerController);
 
 // Login/Sessions Route
 const sessionsController = require("./controllers/sessions");
 app.use("/login", sessionsController);
 
-// Protected Routes (profile, cart, logout)
+// Protected Routes (profile, cart, logout, admin)
 const profileController = require("./controllers/profile");
 app.use("/profile", auth.isAuthenticated, profileController);
 

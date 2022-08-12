@@ -1,6 +1,6 @@
 <%- include('partials/header'); -%>
 
-  <div class="container-fluid">
+  <div class="container">
     <div class="row" id="show-cart">
 
       <h1><%= userName %>'s cart</h1>
@@ -21,7 +21,7 @@
       </div>
       <div class="col-md-2">
         <p>Total Price: $<%= item.totalPrice %></p>
-        <form method="POST" action="/cart/<%= cartId %>/lineItems/<%= item._id%>?_method=DELETE">
+        <form method="POST" action="/cart/<%= cartId %>/lineItems/<%= item._id %>?_method=DELETE">
           <button type="submit">Delete from Cart</button>
         </form>  
       </div>

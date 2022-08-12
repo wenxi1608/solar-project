@@ -27,15 +27,9 @@
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
 
           <% if (!authUser) { %>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              English
-            </a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Action</a></li>
-              <li><a class="dropdown-item" href="#">Another action</a></li>
-              <li><a class="dropdown-item" href="#">Something else here</a></li>
-            </ul>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/destinations"><i class="fa-solid fa-rocket"></i></i>Destinations</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/login"><i class="fa-solid fa-unlock-keyhole"></i>Log in</a>
@@ -45,9 +39,7 @@
           </li>
 
           <% } else { %>
-            <li class="nav-item">
-              <a class="nav-link" href="/wishlist"><i class="fa-solid fa-heart"></i>Wishlist</a>
-            </li>
+            
             <li class="nav-item">
               <a class="nav-link" href="/cart"><i class="fa-solid fa-cart-shopping"></i>Cart</a>
             </li>
@@ -55,7 +47,7 @@
               <a class="nav-link" href="/destinations"><i class="fa-solid fa-rocket"></i></i>Destinations</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/profile"><i class="fa-solid fa-user"></i>Profile</a>
+              <a class="nav-link" href="/profile"><i class="fa-solid fa-user"></i><%= authUserFirstName %></a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="/logout"><i class="fa-solid fa-door-closed"></i>Logout</a>
