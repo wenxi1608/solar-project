@@ -2,6 +2,10 @@
 
 A travel booking site that allows users to browse and book trips to space.
 
+# Link
+
+[https://solar-project-2022.herokuapp.com/]
+
 ## Features
 
 1. Registration (with welcome email)
